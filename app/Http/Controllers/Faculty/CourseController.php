@@ -23,4 +23,18 @@ class CourseController extends BaseController
         $courses = CourseResource::collection($courses);
         return $this->sendResponse($courses, 'Courses Retrived Successfully!');
     }
+
+    public function show($id)
+    {
+        $course = $this->courseRepository->show($id);
+        $course = new CourseResource($course);
+        return $this->sendResponse($course, 'Course Retrived Successfully!');
+    }
+
+    public function showCourseWithCategory($id)
+    {
+        $courses = $this->courseRepository->showCourseWithCategory($id);
+        $courses = CourseResource::collection($courses);
+        return $this->sendResponse($courses, 'Course Retrived Successfully!');
+    }
 }

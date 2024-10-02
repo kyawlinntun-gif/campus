@@ -19,7 +19,15 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'image' => asset('postImages/' . $this->image),
             'category' => $this->category->name,
-            'created_by' => $this->user->name
+            'created_by' => $this->user->name,
+            'date' => $this->created_at->diffForHumans(),
+            'comments' => $this->comments->map(function($comment) {
+                return [
+                    'comment' => $comment->comment,
+                    'created_by' => $comment->user->name,
+                    'created_at' => $comment->created_at->diffForHumans()
+                ];
+            })
         ];
     }
 }
